@@ -13,6 +13,7 @@ st.set_page_config(page_title="Perencanaan Stok dan Pembelian", layout="wide")
 QG = [0.5, 0.8, 0.9, 0.95, 0.975, 0.99]
 HIJAU, EMAS, KREM, TEKS = "#33504a", "#c9971c", "#e8eeeb", "#1f3a35"
 SALMON, H2, H3, ABU, BIRU = "#f2a07b", "#4f8f3a", "#8bbf5a", "#c4cac8", "#cfe2f3"
+CFG = {"displayModeBar": False}
 NAMA_KEBIJAKAN = {"0": "Aturan praktis (8 minggu)", "1": "Tanpa stok pengaman", "2": "Normal klasik 95%",
                   "3": "Rasio SES empiris 95%", "4": "GBM kuantil 95% seragam", "5": "GBM per kelas (fill rate)",
                   "6": "GBM per kelas (biaya min.)"}
@@ -61,6 +62,25 @@ html, body, .stApp, [data-testid="stMarkdownContainer"], label, p, li, td, th, i
 .info b.t {display: block; color: #c9971c; font-weight: 700; margin-bottom: 2px; font-size: .95rem;}
 .temu {border-left: 3px solid #c9971c; padding: 2px 0 2px 14px; margin: 9px 0; line-height: 1.6; font-size: .93rem;}
 h2, h3 {font-weight: 600 !important; color: #1f3a35;}
+.block-container {container-type: inline-size; container-name: utama;}
+[data-testid="stSidebar"][aria-expanded="true"] {min-width: 220px !important; max-width: 230px !important;}
+.kepala {flex-wrap: wrap; gap: 14px 34px;}
+.kepala .jud {min-width: 0; flex: 1 1 260px;}
+.kepala .jud div {font-size: clamp(1.25rem, 3.2cqw, 1.7rem);}
+.kpi > div:last-child {min-width: 0;}
+.kpi .kl, .kpi .kv, .kpi .kk, .hero, .info, .temu, .jk {overflow-wrap: anywhere;}
+.kpi .kv {font-size: clamp(1.1rem, 2.4cqw, 1.55rem);}
+@container utama (max-width: 980px) {
+  [data-testid="stHorizontalBlock"] {flex-wrap: wrap !important; row-gap: 1rem;}
+  [data-testid="stHorizontalBlock"] > [data-testid="stColumn"], [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex: 1 1 calc(50% - 1rem) !important; min-width: calc(50% - 1rem) !important; width: auto !important;}
+}
+@container utama (max-width: 620px) {
+  [data-testid="stHorizontalBlock"] > [data-testid="stColumn"], [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex: 1 1 100% !important; min-width: 100% !important;}
+  .kepala {padding: 16px 18px;}
+  .kepala .jud {border-left: none; padding-left: 0;}
+}
 </style>""", unsafe_allow_html=True)
 
 
@@ -70,8 +90,8 @@ def tema(fig, h=None, gelap=False):
     fig.update_layout(template="plotly_white", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                       font=dict(color=w, size=12, family="Poppins, sans-serif"), margin=dict(l=6, r=6, t=14, b=6),
                       legend=dict(title=None, bgcolor="rgba(0,0,0,0)"))
-    fig.update_xaxes(gridcolor=g, zerolinecolor=g, linecolor=g)
-    fig.update_yaxes(gridcolor=g, zerolinecolor=g, linecolor=g)
+    fig.update_xaxes(gridcolor=g, zerolinecolor=g, linecolor=g, automargin=True)
+    fig.update_yaxes(gridcolor=g, zerolinecolor=g, linecolor=g, automargin=True)
     if h:
         fig.update_layout(height=h)
     return fig
@@ -224,20 +244,24 @@ def hal_ringkasan():
             jk("Penjualan per kategori: tahun lalu, terakhir, dan prakiraan")
             s = pk.sort_values("prakiraan_unit")
             fig = go.Figure()
-            for kol, nama, w in [("tahun_lalu_unit", "Periode sama tahun lalu", ABU), ("terakhir_unit", f"{H_} minggu terakhir", HIJAU),
-                                 ("prakiraan_unit", f"Prakiraan {H_} minggu ke depan", EMAS)]:
+            for kol, nama, w in [("tahun_lalu_unit", "Tahun lalu", ABU), ("terakhir_unit", f"{H_} minggu terakhir", HIJAU),
+                                 ("prakiraan_unit", "Prakiraan", EMAS)]:
                 fig.add_bar(y=s["kategori"], x=s[kol], name=nama, orientation="h", marker_color=w)
-            fig.update_layout(barmode="group", xaxis_title="unit", legend=dict(orientation="h", y=1.1), bargap=.25)
-            st.plotly_chart(tema(fig, 470), width="stretch")
+            fig.update_layout(barmode="group", xaxis_title="unit", legend=dict(orientation="h", y=-0.18, x=0, xanchor="left"), bargap=.25)
+            st.plotly_chart(tema(fig, 470), width="stretch", config=CFG)
             st.caption("Cara membaca: tiap kategori punya tiga batang. Batang emas adalah perkiraan untuk beberapa minggu ke depan. "
                        "Bandingkan dengan batang hijau (baru saja terjadi) dan abu-abu (periode yang sama tahun lalu).")
     with kanan:
         with st.container(key="kartu_top"):
             jk("Barang yang paling perlu disiapkan")
             t = rencana.nlargest(10, "prak_nilai")
-            st.dataframe(pd.DataFrame({"Barang": t["deskripsi"].str.title().str[:32], "Kategori": t["kategori"],
+            st.dataframe(pd.DataFrame({"Barang": t["deskripsi"].str.title().str[:28],
                                        "Prakiraan (unit)": t["prak_unit"].round(0).astype(int),
-                                       "Siapkan (unit)": t["sasaran_unit"].round(0).astype(int)}), hide_index=True, width="stretch", height=420)
+                                       "Siapkan (unit)": t["sasaran_unit"].round(0).astype(int),
+                                       "Kategori": t["kategori"]}), hide_index=True, width="stretch", height=420,
+                         column_config={"Barang": st.column_config.TextColumn(width="medium"),
+                                        "Prakiraan (unit)": st.column_config.NumberColumn(width="small"),
+                                        "Siapkan (unit)": st.column_config.NumberColumn(width="small")})
             st.caption("Diurutkan menurut nilai penjualan yang diperkirakan. 'Siapkan' = stok sasaran agar 95% aman dari kehabisan.")
     a1, a2 = st.columns([2, 3])
     with a1:
@@ -248,7 +272,7 @@ def hal_ringkasan():
             fig = go.Figure(go.Bar(x=["Per barang", "Per kategori"], y=[wi, wk], marker_color=[ABU, EMAS],
                                    text=[f"{wi:.0f}%", f"{wk:.0f}%"], textposition="outside", cliponaxis=False))
             fig.update_yaxes(range=[0, wi * 1.3], title="rata-rata meleset (%)")
-            st.plotly_chart(tema(fig, 280), width="stretch")
+            st.plotly_chart(tema(fig, 280), width="stretch", config=CFG)
             st.caption("Diuji pada beberapa periode lampau. Makin pendek batang, makin akurat.")
     with a2:
         with st.container(key="kartu_arti"):
@@ -317,11 +341,11 @@ def hal_kategori():
     with c1:
         with st.container(key="kartu_mingguan_kat"):
             jk("Penjualan mingguan dan prakiraan")
-            st.plotly_chart(grafik_mingguan(rk[rk["kategori"] == kat], r["prakiraan_unit"]), width="stretch")
+            st.plotly_chart(grafik_mingguan(rk[rk["kategori"] == kat], r["prakiraan_unit"]), width="stretch", config=CFG)
     with c2:
         with st.container(key="kartu_tiga_kat"):
             jk("Dibanding periode lain")
-            st.plotly_chart(tiga_batang(r["tahun_lalu_unit"], r["terakhir_unit"], r["prakiraan_unit"], r["wape"]), width="stretch")
+            st.plotly_chart(tiga_batang(r["tahun_lalu_unit"], r["terakhir_unit"], r["prakiraan_unit"], r["wape"]), width="stretch", config=CFG)
     with st.container(key="kartu_barang_kat"):
         jk(f"Barang di kategori ini ({int(r['n_barang'])} barang aktif)")
         t = rencana[rencana["kategori"] == kat].nlargest(15, "prak_nilai")
@@ -354,7 +378,7 @@ def hal_barang():
     with c1:
         with st.container(key="kartu_mingguan_brg"):
             jk("Penjualan mingguan dan prakiraan")
-            st.plotly_chart(grafik_mingguan(riw[riw["kode"] == r["kode"]], r["prak_unit"]), width="stretch")
+            st.plotly_chart(grafik_mingguan(riw[riw["kode"] == r["kode"]], r["prak_unit"]), width="stretch", config=CFG)
     with c2:
         with st.container(key="gelap_aman"):
             jk("Makin ingin aman, makin banyak yang disiapkan", gelap=True)
@@ -363,7 +387,7 @@ def hal_barang():
             fig = go.Figure(go.Bar(x=nama, y=val, marker_color=["#ffffff", ABU, EMAS, EMAS], text=[f"{v:,.0f}" for v in val],
                                    textposition="outside", cliponaxis=False))
             fig.update_yaxes(range=[0, max(val) * 1.25 + 1], title="unit")
-            st.plotly_chart(tema(fig, 330, gelap=True), width="stretch")
+            st.plotly_chart(tema(fig, 330, gelap=True), width="stretch", config=CFG)
     st.caption(f"Barang ini termasuk kelas {r['kelas']} dengan pola permintaan {r['jenis']}. 'Aman 95%' berarti kira-kira 95 dari 100 kali stok cukup untuk {H_} minggu.")
 
 
@@ -440,7 +464,7 @@ def hal_layanan():
                                marker_color=[EMAS if q in (a, b) else ABU for q in kk["q"]],
                                text=[rp(v) for v in kk["nilai_pengaman_GBP"]], textposition="outside", cliponaxis=False))
         fig.update_yaxes(visible=False, range=[0, kk["nilai_pengaman_GBP"].max() * 1.2])
-        st.plotly_chart(tema(fig, 330), width="stretch")
+        st.plotly_chart(tema(fig, 330), width="stretch", config=CFG)
         temuan(f"Dari {a * 100:g}% ke {b * 100:g}%, modal stok cadangan bertambah {rp(vb - va)} ({(vb / va - 1) * 100:+.0f}%). "
                "Kenaikan makin mahal di ujung atas: sedikit tambahan rasa aman membutuhkan banyak tambahan stok.")
     with st.expander("Kebijakan termurah menurut margin dan biaya (lebih teknis)"):
@@ -465,7 +489,7 @@ def hal_bukti():
                                   error_y=dict(type="data", symmetric=False, array=b["biaya_97.5%"] - b["biaya_total"],
                                                arrayminus=b["biaya_total"] - b["biaya_2.5%"], color=HIJAU)))
             f1.update_layout(yaxis_title="GBP")
-            st.plotly_chart(tema(f1, 380), width="stretch")
+            st.plotly_chart(tema(f1, 380), width="stretch", config=CFG)
     with k2:
         with st.container(key="gelap_fill"):
             jk("Permintaan yang terpenuhi (fill rate) dan selang 95%", gelap=True)
@@ -473,7 +497,7 @@ def hal_bukti():
                                   error_y=dict(type="data", symmetric=False, array=(b["fill_97.5%"] - b["fill_rate"]) * 100,
                                                arrayminus=(b["fill_rate"] - b["fill_2.5%"]) * 100, color=EMAS)))
             f2.update_layout(yaxis=dict(range=[70, 100], title="%"))
-            st.plotly_chart(tema(f2, 380, gelap=True), width="stretch")
+            st.plotly_chart(tema(f2, 380, gelap=True), width="stretch", config=CFG)
     with st.container(key="kartu_tabelsim"):
         jk(f"Simulasi ulang {D['jendela_simulasi_minggu']} minggu terakhir, diuji buta")
         st.dataframe(pd.DataFrame({"Kebijakan": b["nama"], "Biaya total": b["biaya_total"].round(0),
@@ -499,7 +523,7 @@ def hal_bukti():
             for met, w in zip(pv.columns, [ABU, EMAS, HIJAU]):
                 fig.add_bar(x=pv.index, y=pv[met], name=met, marker_color=w)
             fig.update_layout(barmode="group", yaxis=dict(range=[80, 100], title="peluang stok cukup (%)"))
-            st.plotly_chart(tema(fig, 300), width="stretch")
+            st.plotly_chart(tema(fig, 300), width="stretch", config=CFG)
 
 
 # ================= halaman 8: metode =================
