@@ -27,49 +27,85 @@ IK = {
 }
 
 st.markdown("""<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-html, body, .stApp, [data-testid="stMarkdownContainer"], label, p, li, td, th, input, button {font-family: 'Poppins', sans-serif;}
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+html, body, .stApp, [data-testid="stMarkdownContainer"], label, p, li, td, th, input, button {font-family: 'Plus Jakarta Sans', sans-serif;}
+.kepala .jud div, .kpi .kv, .jk, .info b.t, .sub, .bar-stok, h1, h2, h3 {font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;}
 .stApp {background: #e8eeeb;}
 [data-testid="stHeader"] {background: transparent;}
-.block-container {padding-top: 1.6rem; max-width: 1320px;}
-[data-testid="stSidebar"] {background: #2f4a45;}
-[data-testid="stSidebar"] * {color: #e8eeeb;}
-[data-testid="stSidebarNav"] a[aria-current="page"] {background: rgba(255,255,255,.14); border-radius: 10px;}
-[class*="st-key-kartu"] {background: #fff; border-radius: 22px; padding: 18px 22px; box-shadow: 0 2px 10px rgba(31,58,53,.08);}
-[class*="st-key-gelap"] {background: #33504a; border-radius: 22px; padding: 18px 22px; box-shadow: 0 2px 10px rgba(31,58,53,.15);}
+.block-container {padding-top: 1.6rem; max-width: 1320px; container-type: inline-size; container-name: utama;}
+[data-testid="stCaptionContainer"] {color: #5b6f69;}
+
+/* sidebar */
+[data-testid="stSidebar"] {background: #263f3a; border-right: none;}
+[data-testid="stSidebar"][aria-expanded="true"] {min-width: 220px !important; max-width: 230px !important;}
+[data-testid="stSidebar"] * {color: #dbe6e1;}
+[data-testid="stSidebarNav"]::before {content: "Stok dan Pembelian"; display: block; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
+  font-size: 1.3rem; color: #fff; padding: 20px 16px 14px 16px; margin: 0 8px 10px 8px; border-bottom: 1px solid rgba(255,255,255,.16);}
+[data-testid="stSidebarNav"] a, [data-testid="stSidebarNavLink"] {border-radius: 10px; margin: 2px 8px; padding: .45rem .8rem;}
+[data-testid="stSidebarNav"] a:hover, [data-testid="stSidebarNavLink"]:hover {background: rgba(255,255,255,.08);}
+[data-testid="stSidebarNav"] a[aria-current="page"], [data-testid="stSidebarNavLink"][aria-current="page"] {background: rgba(255,255,255,.13); box-shadow: inset 3px 0 0 #e0b23c;}
+[data-testid="stSidebarNav"] a[aria-current="page"] *, [data-testid="stSidebarNavLink"][aria-current="page"] * {color: #fff; font-weight: 600;}
+
+/* kartu */
+[class*="st-key-kartu"] {background: #fff; border: 1px solid #d3ddd8; border-radius: 16px; padding: 20px 22px;}
+[class*="st-key-gelap"] {background: #2f4a45; border-radius: 16px; padding: 20px 22px;}
 [class*="st-key-gelap"] p, [class*="st-key-gelap"] label {color: #fff;}
-.kepala {background: #33504a; border-radius: 22px; padding: 20px 30px; display: flex; align-items: center; gap: 34px; margin-bottom: 14px;}
-.kepala .per span {display: block; color: #e0b23c; font-weight: 600; font-size: .95rem;}
-.kepala .per b {color: #fff; font-size: 1.15rem; font-weight: 600;}
-.kepala .jud {border-left: 2px solid rgba(255,255,255,.7); padding-left: 26px;}
-.kepala .jud div {color: #fff; font-size: 1.7rem; font-weight: 700; letter-spacing: .5px; line-height: 1.15;}
-.kepala .jud p {color: #e0b23c; margin: 2px 0 0 0; font-size: .95rem; font-weight: 500;}
-.kpi {background: #fff; border-radius: 20px; padding: 16px 18px; display: flex; gap: 14px; align-items: center; box-shadow: 0 2px 10px rgba(31,58,53,.08); min-height: 104px;}
-.kpi .ik {width: 46px; height: 46px; border-radius: 12px; background: #f5ecd2; display: flex; align-items: center; justify-content: center; flex: none;}
-.kpi svg {width: 26px; height: 26px; fill: none; stroke: #c9971c; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;}
-.kpi .kl {font-weight: 600; font-size: .86rem; color: #33504a;}
-.kpi .kv {font-weight: 700; font-size: 1.55rem; color: #1f3a35; line-height: 1.2;}
-.kpi .kk {font-size: .72rem; color: #7b8c88;}
-.jk {font-weight: 600; font-size: .98rem; color: #1f3a35; margin-bottom: 6px;}
-.jk:before {content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #c9971c; margin-right: 8px;}
+[class*="st-key-gelap_hero"] {border-radius: 24px; padding: 28px 32px 24px 32px;}
+
+/* kepala halaman */
+.kepala {background: #2f4a45; border-radius: 20px; border-bottom: 4px solid #c9971c; padding: 22px 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 34px; margin-bottom: 16px;}
+.kepala .per span {display: block; color: #e0b23c; font-weight: 600; font-size: .9rem;}
+.kepala .per b {color: #fff; font-size: 1.1rem; font-weight: 600;}
+.kepala .jud {border-left: 2px solid rgba(255,255,255,.55); padding-left: 26px; min-width: 0; flex: 1 1 260px;}
+.kepala .jud div {color: #fff; font-size: clamp(1.3rem, 3.2cqw, 1.9rem); font-weight: 700; line-height: 1.12;}
+.kepala .jud p {color: #e0b23c; margin: 4px 0 0 0; font-size: .95rem; font-weight: 500;}
+
+/* kartu angka */
+.kpi {background: #fff; border: 1px solid #d3ddd8; border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; align-items: center; min-height: 98px;}
+.kpi > div:last-child {min-width: 0;}
+.kpi .ik {width: 40px; height: 40px; border-radius: 10px; background: #f5ecd2; display: flex; align-items: center; justify-content: center; flex: none;}
+.kpi svg {width: 23px; height: 23px; fill: none; stroke: #9a7414; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;}
+.kpi .kl {font-weight: 600; font-size: .82rem; color: #46605a;}
+.kpi .kv {font-weight: 700; font-size: clamp(1.15rem, 2.4cqw, 1.6rem); color: #1f3a35; line-height: 1.2;}
+.kpi .kv.naik {color: #1f6b3f;}
+.kpi .kv.turun {color: #a2432a;}
+.kpi .kv.naik::before {content: "\25B2 "; font-size: .62em; vertical-align: .12em;}
+.kpi .kv.turun::before {content: "\25BC "; font-size: .62em; vertical-align: .12em;}
+.kpi .kk {font-size: .74rem; color: #6a7d77;}
+.kpi .kl, .kpi .kv, .kpi .kk, .hero, .info, .temu, .jk {overflow-wrap: anywhere;}
+
+/* judul bagian */
+.jk {font-weight: 600; font-size: 1.06rem; color: #1f3a35; margin-bottom: 8px;}
 .gelap-j {color: #fff;}
-.sub {color: #c9971c; font-weight: 600; font-size: 1.05rem; margin: 8px 0 4px 0;}
+.sub {color: #8a6410; font-weight: 600; font-size: 1.05rem; margin: 8px 0 4px 0;}
 .baris {display: flex; justify-content: space-between; align-items: center; margin: 6px 0; font-size: .9rem; color: #1f3a35;}
 .pil {background: #cfe2f3; border-radius: 8px; padding: 2px 12px; font-weight: 600; min-width: 74px; text-align: center; color: #1f3a35;}
-.hero {color: #fff; font-size: 1.12rem; line-height: 1.7;}
-.hero b {color: #e0b23c; font-weight: 700;}
-.info {font-size: .88rem; line-height: 1.6; color: #1f3a35;}
-.info b.t {display: block; color: #c9971c; font-weight: 700; margin-bottom: 2px; font-size: .95rem;}
+.info {font-size: .88rem; line-height: 1.65; color: #1f3a35;}
+.info b.t {display: block; color: #8a6410; font-weight: 700; margin-bottom: 3px; font-size: 1rem;}
 .temu {border-left: 3px solid #c9971c; padding: 2px 0 2px 14px; margin: 9px 0; line-height: 1.6; font-size: .93rem;}
 h2, h3 {font-weight: 600 !important; color: #1f3a35;}
-.block-container {container-type: inline-size; container-name: utama;}
-[data-testid="stSidebar"][aria-expanded="true"] {min-width: 220px !important; max-width: 230px !important;}
-.kepala {flex-wrap: wrap; gap: 14px 34px;}
-.kepala .jud {min-width: 0; flex: 1 1 260px;}
-.kepala .jud div {font-size: clamp(1.25rem, 3.2cqw, 1.7rem);}
-.kpi > div:last-child {min-width: 0;}
-.kpi .kl, .kpi .kv, .kpi .kk, .hero, .info, .temu, .jk {overflow-wrap: anywhere;}
-.kpi .kv {font-size: clamp(1.1rem, 2.4cqw, 1.55rem);}
+
+/* kotak utama di ringkasan */
+.hero {color: #fff; font-size: 1.08rem; line-height: 1.7; max-width: 76ch;}
+.hero b {color: #e0b23c; font-weight: 700;}
+.bar-stok {display: flex; height: 48px; border-radius: 12px; overflow: hidden; margin-top: 22px; background: rgba(255,255,255,.1);}
+.bar-stok div {display: flex; align-items: center; padding: 0 14px; font-weight: 700; font-size: 1.05rem; white-space: nowrap; overflow: hidden;}
+.bar-stok .a {background: #e0b23c; color: #1f3a35;}
+.bar-stok .b {background: rgba(255,255,255,.2); color: #fff;}
+.bar-ket {display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 10px; font-size: .82rem; color: #c9d8d2;}
+.bar-ket .d {display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 7px;}
+.bar-ket .d.a {background: #e0b23c;}
+.bar-ket .d.b {background: rgba(255,255,255,.35);}
+.bar-ket span:last-child {margin-left: auto; color: #fff; font-weight: 600;}
+
+/* kontrol */
+[data-baseweb="select"] > div {border-radius: 12px; border-color: #c9d5d0; background: #fff;}
+.stDownloadButton button {background: #c9971c; border: none; border-radius: 12px; padding: .55rem 1.1rem;}
+.stDownloadButton button, .stDownloadButton button p {color: #fff; font-weight: 600;}
+.stDownloadButton button:hover {background: #a97c10;}
+a:focus-visible, button:focus-visible {outline: 2px solid #c9971c; outline-offset: 2px;}
+
+/* layar sempit atau sidebar terbuka */
 @container utama (max-width: 980px) {
   [data-testid="stHorizontalBlock"] {flex-wrap: wrap !important; row-gap: 1rem;}
   [data-testid="stHorizontalBlock"] > [data-testid="stColumn"], [data-testid="stHorizontalBlock"] > [data-testid="column"] {
@@ -80,18 +116,25 @@ h2, h3 {font-weight: 600 !important; color: #1f3a35;}
     flex: 1 1 100% !important; min-width: 100% !important;}
   .kepala {padding: 16px 18px;}
   .kepala .jud {border-left: none; padding-left: 0;}
+  [class*="st-key-gelap_hero"] {padding: 20px 18px;}
+  .bar-ket span:last-child {margin-left: 0;}
 }
 </style>""", unsafe_allow_html=True)
 
 
 def tema(fig, h=None, gelap=False):
     w = "#ffffff" if gelap else TEKS
-    g = "rgba(255,255,255,.16)" if gelap else "rgba(31,58,53,.10)"
+    g = "rgba(255,255,255,.14)" if gelap else "rgba(31,58,53,.08)"
     fig.update_layout(template="plotly_white", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                      font=dict(color=w, size=12, family="Poppins, sans-serif"), margin=dict(l=6, r=6, t=14, b=6),
-                      legend=dict(title=None, bgcolor="rgba(0,0,0,0)"))
-    fig.update_xaxes(gridcolor=g, zerolinecolor=g, linecolor=g, automargin=True)
-    fig.update_yaxes(gridcolor=g, zerolinecolor=g, linecolor=g, automargin=True)
+                      font=dict(color=w, size=12, family="Plus Jakarta Sans, sans-serif"), margin=dict(l=6, r=6, t=14, b=6),
+                      legend=dict(title=None, bgcolor="rgba(0,0,0,0)", font=dict(size=11)),
+                      hoverlabel=dict(bgcolor="#ffffff", font=dict(color=TEKS, family="Plus Jakarta Sans, sans-serif", size=12), bordercolor=ABU))
+    fig.update_xaxes(gridcolor=g, zeroline=False, linecolor=g, automargin=True, tickfont=dict(size=11))
+    fig.update_yaxes(gridcolor=g, zeroline=False, linecolor=g, automargin=True, tickfont=dict(size=11))
+    try:
+        fig.update_traces(marker_cornerradius=4, selector=dict(type="bar"))
+    except Exception:
+        pass
     if h:
         fig.update_layout(height=h)
     return fig
@@ -112,10 +155,17 @@ def jk(teks, gelap=False):
     st.markdown(f'<div class="jk {"gelap-j" if gelap else ""}">{html.escape(teks)}</div>', unsafe_allow_html=True)
 
 
+def arah(v):
+    v = str(v)
+    if len(v) > 2 and v[-1] == "%" and v[0] in "+-" and v[1:-1].replace(".", "").isdigit():
+        return "naik" if v[0] == "+" else "turun"
+    return ""
+
+
 def kpi_baris(items):
     for c, (ik, jud, nilai, ket) in zip(st.columns(len(items)), items):
         c.markdown(f'<div class="kpi"><div class="ik"><svg viewBox="0 0 24 24">{IK[ik]}</svg></div><div>'
-                   f'<div class="kl">{html.escape(jud)}</div><div class="kv">{html.escape(str(nilai))}</div>'
+                   f'<div class="kl">{html.escape(jud)}</div><div class="kv {arah(nilai)}">{html.escape(str(nilai))}</div>'
                    f'<div class="kk">{html.escape(ket)}</div></div></div>', unsafe_allow_html=True)
 
 
@@ -228,9 +278,15 @@ def hal_ringkasan():
     t_prak, t_akhir, t_tl = pk["prakiraan_unit"].sum(), pk["terakhir_unit"].sum(), pk["tahun_lalu_unit"].sum()
     nilai, sasaran, biaya = pk["prakiraan_nilai"].sum(), pk["sasaran_unit"].sum(), pk["sasaran_biaya"].sum()
     with st.container(key="gelap_hero"):
+        cad = max(sasaran - t_prak, 0)
+        tot = max(sasaran, t_prak, 1)
         st.markdown(f'<div class="hero">Untuk <b>{periode_depan()}</b>, toko diperkirakan menjual sekitar <b>{t_prak:,.0f} unit</b> '
                     f'senilai <b>{rp(nilai)}</b>. Agar peluang kehabisan stok hanya 5%, siapkan sekitar <b>{sasaran:,.0f} unit</b> '
-                    f'(modal sekitar <b>{rp(biaya)}</b>) untuk barang-barang yang masih laku.</div>', unsafe_allow_html=True)
+                    f'(modal sekitar <b>{rp(biaya)}</b>) untuk barang-barang yang masih laku.</div>'
+                    f'<div class="bar-stok"><div class="a" style="width:{t_prak / tot * 100:.1f}%">{t_prak:,.0f}</div>'
+                    f'<div class="b" style="width:{cad / tot * 100:.1f}%">+{cad:,.0f}</div></div>'
+                    f'<div class="bar-ket"><span><i class="d a"></i>Perkiraan terjual</span><span><i class="d b"></i>Cadangan pengaman</span>'
+                    f'<span>Total disiapkan: {sasaran:,.0f} unit</span></div>', unsafe_allow_html=True)
     st.write("")
     besar = pk.sort_values("prakiraan_unit", ascending=False).iloc[0]
     kpi_baris([("kotak", f"Prakiraan penjualan {H_} minggu", f"{t_prak:,.0f} unit", f"senilai {rp(nilai)}"),
