@@ -4,7 +4,7 @@
 
 Dashboard interaktif yang menjawab: **berapa yang akan laku dalam 5 minggu ke depan, dan berapa stok yang perlu disiapkan agar kecil kemungkinan kehabisan, tanpa menumpuk modal di gudang.**
 
-**[Buka dashboard](https://GANTI-DENGAN-LINK-ANDA.streamlit.app)**
+**[Buka dashboard](https://demand-forecasting-and-inventory-planning-dashboard-6vagug5ybx.streamlit.app/)**
 
 ## Ringkasan singkat (untuk pembaca non-teknis)
 
