@@ -1,0 +1,477 @@
+{
+  "parameter": {
+    "LEAD": 4,
+    "TINJAU": 1,
+    "H": 5,
+    "RASIO_BIAYA": 0.6,
+    "BIAYA_SIMPAN": 0.2,
+    "BIAYA_PESAN": 30.0,
+    "TARGET_FILL": 0.95,
+    "COVER_PRAKTIS": 8
+  },
+  "data": {
+    "periode": [
+      "2009-12-07",
+      "2011-11-28"
+    ],
+    "jumlah_minggu": 104,
+    "jumlah_barang": 4700,
+    "barang_direncanakan": 3171,
+    "persen_sel_nol": 0.6086968085106383,
+    "pesanan_dibatalkan_baris": 3356,
+    "titik_awal_uji": [
+      59,
+      64,
+      69,
+      74,
+      79,
+      84,
+      89,
+      94,
+      99
+    ],
+    "jendela_simulasi_minggu": 15
+  },
+  "q_final_biaya_min": {
+    "A": 0.95,
+    "B": 0.9,
+    "C": 0.8
+  },
+  "q_final_fill_rate": {
+    "A": 0.9,
+    "B": 0.8,
+    "C": 0.9
+  },
+  "akurasi": {
+    "WAPE": {
+      "ma4": 0.5701,
+      "ma13": 0.6167,
+      "ses": 0.5545,
+      "croston": 0.7822,
+      "snaive": 1.0259,
+      "gbm": 0.5865
+    },
+    "bias": {
+      "ma4": -0.0625,
+      "ma13": 0.0177,
+      "ses": -0.0197,
+      "croston": 0.1889,
+      "snaive": 0.1956,
+      "gbm": 0.0776
+    },
+    "rMAE_median_vs_ma4": {
+      "ma4": 1.0,
+      "ma13": 1.0384,
+      "ses": 0.9935,
+      "croston": 1.0858,
+      "snaive": 1.5591,
+      "gbm": 1.1484
+    }
+  },
+  "akurasi_per_pola": {
+    "bergejolak": {
+      "ma4": 0.5766556131013537,
+      "ma13": 0.6023433394872482,
+      "ses": 0.5473287306230133,
+      "croston": 0.5935337085818287,
+      "snaive": 0.8864370652861899,
+      "gbm": 0.5609463055466399
+    },
+    "sangat tidak teratur": {
+      "ma4": 0.8047074533136899,
+      "ma13": 0.9728355443851943,
+      "ses": 0.8300088549284261,
+      "croston": 1.940271306440203,
+      "snaive": 1.9258607743983254,
+      "gbm": 0.8306381592614017
+    },
+    "stabil": {
+      "ma4": 0.35515737309956213,
+      "ma13": 0.36240954818117016,
+      "ses": 0.3455048834177789,
+      "croston": 0.36025326574082217,
+      "snaive": 0.6766329635698259,
+      "gbm": 0.4510492242010626
+    },
+    "terputus-putus": {
+      "ma4": 0.7981535694130926,
+      "ma13": 0.9363116426462929,
+      "ses": 0.8211104866433269,
+      "croston": 2.200449744794433,
+      "snaive": 2.1412598758465013,
+      "gbm": 1.0362920597266752
+    }
+  },
+  "akurasi_per_kelas": {
+    "A": {
+      "ma4": 0.5157384366719999,
+      "ma13": 0.5540468063067072,
+      "ses": 0.4974313919778684,
+      "croston": 0.5815640487316605,
+      "snaive": 0.8117374232762863,
+      "gbm": 0.5387045153139132
+    },
+    "B": {
+      "ma4": 0.6174421604658754,
+      "ma13": 0.699363139361665,
+      "ses": 0.6066755180136043,
+      "croston": 0.9233363889104848,
+      "snaive": 1.3472151725445183,
+      "gbm": 0.6036298426552164
+    },
+    "C": {
+      "ma4": 0.8327184018253756,
+      "ma13": 0.8541945735406425,
+      "ses": 0.8239460357074926,
+      "croston": 1.8286065419133022,
+      "snaive": 1.7495472971332864,
+      "gbm": 0.8740405590314028
+    }
+  },
+  "cakupan_rop": [
+    {
+      "target": 0.9,
+      "metode": "normal klasik",
+      "hit_rate": 0.8530245893975753,
+      "fill_unit": 0.8694654938649303,
+      "stok/permintaan": 1.739352781586989,
+      "nilai_rop/nilai_permintaan": 1.8363622624499278
+    },
+    {
+      "target": 0.9,
+      "metode": "rasio SES empiris",
+      "hit_rate": 0.9119269486084707,
+      "fill_unit": 0.9357170934399613,
+      "stok/permintaan": 2.561942282606599,
+      "nilai_rop/nilai_permintaan": 2.5188492154841633
+    },
+    {
+      "target": 0.9,
+      "metode": "GBM kuantil",
+      "hit_rate": 0.9092155701686041,
+      "fill_unit": 0.9012152441237297,
+      "stok/permintaan": 1.839117688868301,
+      "nilai_rop/nilai_permintaan": 1.9466944709232785
+    },
+    {
+      "target": 0.95,
+      "metode": "normal klasik",
+      "hit_rate": 0.8790787546358338,
+      "fill_unit": 0.8911673473226327,
+      "stok/permintaan": 1.9545435523543657,
+      "nilai_rop/nilai_permintaan": 2.0800503137185755
+    },
+    {
+      "target": 0.95,
+      "metode": "rasio SES empiris",
+      "hit_rate": 0.957023093464643,
+      "fill_unit": 0.9639065054270708,
+      "stok/permintaan": 3.9835751429615067,
+      "nilai_rop/nilai_permintaan": 3.8583977969160794
+    },
+    {
+      "target": 0.95,
+      "metode": "GBM kuantil",
+      "hit_rate": 0.9508523701187397,
+      "fill_unit": 0.9374614584012106,
+      "stok/permintaan": 2.394759947902191,
+      "nilai_rop/nilai_permintaan": 2.590612464891356
+    },
+    {
+      "target": 0.99,
+      "metode": "normal klasik",
+      "hit_rate": 0.9120827749555895,
+      "fill_unit": 0.9195292636035227,
+      "stok/permintaan": 2.358205650325388,
+      "nilai_rop/nilai_permintaan": 2.53716857057871
+    },
+    {
+      "target": 0.99,
+      "metode": "rasio SES empiris",
+      "hit_rate": 0.9927073269548415,
+      "fill_unit": 0.9891413814801212,
+      "stok/permintaan": 12.891517955064776,
+      "nilai_rop/nilai_permintaan": 12.122501224030252
+    },
+    {
+      "target": 0.99,
+      "metode": "GBM kuantil",
+      "hit_rate": 0.9880325365412784,
+      "fill_unit": 0.9752488468255692,
+      "stok/permintaan": 4.235839595368594,
+      "nilai_rop/nilai_permintaan": 4.893753195286896
+    }
+  ],
+  "kurva_layanan": [
+    {
+      "q": 0.5,
+      "unit_pengaman": 18923.43538926061,
+      "nilai_pengaman_GBP": 16387.998030271614
+    },
+    {
+      "q": 0.8,
+      "unit_pengaman": 162694.4770371194,
+      "nilai_pengaman_GBP": 171704.2317139923
+    },
+    {
+      "q": 0.9,
+      "unit_pengaman": 346785.9141250086,
+      "nilai_pengaman_GBP": 413059.75334880245
+    },
+    {
+      "q": 0.95,
+      "unit_pengaman": 666272.4037383215,
+      "nilai_pengaman_GBP": 844448.9079209636
+    },
+    {
+      "q": 0.975,
+      "unit_pengaman": 1043451.5782014419,
+      "nilai_pengaman_GBP": 1406132.2581097574
+    },
+    {
+      "q": 0.99,
+      "unit_pengaman": 1664286.6766770072,
+      "nilai_pengaman_GBP": 2303001.8299764595
+    }
+  ],
+  "simulasi": {
+    "0. aturan praktis: cakupan 8 minggu": {
+      "fill_rate": 0.8563,
+      "minggu_kehabisan": 0.0595,
+      "nilai_stok_rata2": 969592.5579,
+      "margin_hilang": 257187.0434,
+      "biaya_simpan": 55938.0322,
+      "biaya_pesan": 129150.0,
+      "biaya_total": 442275.0756,
+      "fill_A": 0.8788,
+      "fill_B": 0.8271,
+      "fill_C": 0.7874
+    },
+    "1. tanpa stok pengaman": {
+      "fill_rate": 0.8239,
+      "minggu_kehabisan": 0.0721,
+      "nilai_stok_rata2": 768757.4998,
+      "margin_hilang": 314236.6002,
+      "biaya_simpan": 44351.3942,
+      "biaya_pesan": 115740.0,
+      "biaya_total": 474327.9945,
+      "fill_A": 0.8361,
+      "fill_B": 0.8137,
+      "fill_C": 0.7721
+    },
+    "2. normal klasik 95%": {
+      "fill_rate": 0.8941,
+      "minggu_kehabisan": 0.0394,
+      "nilai_stok_rata2": 1154718.4891,
+      "margin_hilang": 200769.9839,
+      "biaya_simpan": 66618.3744,
+      "biaya_pesan": 119850.0,
+      "biaya_total": 387238.3583,
+      "fill_A": 0.9085,
+      "fill_B": 0.8769,
+      "fill_C": 0.8462
+    },
+    "3. rasio SES empiris 95%": {
+      "fill_rate": 0.9605,
+      "minggu_kehabisan": 0.0141,
+      "nilai_stok_rata2": 2712854.9591,
+      "margin_hilang": 84953.9283,
+      "biaya_simpan": 156510.863,
+      "biaya_pesan": 158700.0,
+      "biaya_total": 400164.7914,
+      "fill_A": 0.9641,
+      "fill_B": 0.9614,
+      "fill_C": 0.9354
+    },
+    "4. GBM kuantil 95% seragam": {
+      "fill_rate": 0.943,
+      "minggu_kehabisan": 0.0151,
+      "nilai_stok_rata2": 1621049.3328,
+      "margin_hilang": 117744.1077,
+      "biaya_simpan": 93522.0769,
+      "biaya_pesan": 156090.0,
+      "biaya_total": 367356.1846,
+      "fill_A": 0.9515,
+      "fill_B": 0.9328,
+      "fill_C": 0.9156
+    },
+    "5. GBM kuantil per ABC (fill rate)": {
+      "fill_rate": 0.9096,
+      "minggu_kehabisan": 0.0269,
+      "nilai_stok_rata2": 1266653.9092,
+      "margin_hilang": 167238.5644,
+      "biaya_simpan": 73076.1871,
+      "biaya_pesan": 139980.0,
+      "biaya_total": 380294.7515,
+      "fill_A": 0.9283,
+      "fill_B": 0.8748,
+      "fill_C": 0.8802
+    },
+    "6. GBM kuantil per ABC (biaya min)": {
+      "fill_rate": 0.9058,
+      "minggu_kehabisan": 0.0324,
+      "nilai_stok_rata2": 1237407.8055,
+      "margin_hilang": 171598.3363,
+      "biaya_simpan": 71388.9119,
+      "biaya_pesan": 134130.0,
+      "biaya_total": 377117.2482,
+      "fill_A": 0.9283,
+      "fill_B": 0.8734,
+      "fill_C": 0.8454
+    }
+  },
+  "simulasi_bootstrap": {
+    "0. aturan praktis: cakupan 8 minggu": {
+      "biaya_total": 442275.0756,
+      "biaya_2.5%": 386496.0643,
+      "biaya_97.5%": 513604.6806,
+      "selisih_vs_terbaik": 74918.8911,
+      "selisih_2.5%": 53619.9836,
+      "selisih_97.5%": 97392.7736,
+      "fill_rate": 0.8563,
+      "fill_2.5%": 0.8352,
+      "fill_97.5%": 0.8781
+    },
+    "1. tanpa stok pengaman": {
+      "biaya_total": 474327.9945,
+      "biaya_2.5%": 411735.3532,
+      "biaya_97.5%": 553138.4203,
+      "selisih_vs_terbaik": 106971.8099,
+      "selisih_2.5%": 82937.0232,
+      "selisih_97.5%": 133167.6936,
+      "fill_rate": 0.8239,
+      "fill_2.5%": 0.8029,
+      "fill_97.5%": 0.8446
+    },
+    "2. normal klasik 95%": {
+      "biaya_total": 387238.3583,
+      "biaya_2.5%": 336404.0022,
+      "biaya_97.5%": 451616.4271,
+      "selisih_vs_terbaik": 19882.1737,
+      "selisih_2.5%": 5931.8117,
+      "selisih_97.5%": 35387.1148,
+      "fill_rate": 0.8941,
+      "fill_2.5%": 0.8758,
+      "fill_97.5%": 0.9122
+    },
+    "3. rasio SES empiris 95%": {
+      "biaya_total": 400164.7914,
+      "biaya_2.5%": 362947.279,
+      "biaya_97.5%": 445630.3546,
+      "selisih_vs_terbaik": 32808.6068,
+      "selisih_2.5%": 9036.4281,
+      "selisih_97.5%": 51256.1404,
+      "fill_rate": 0.9605,
+      "fill_2.5%": 0.9487,
+      "fill_97.5%": 0.9712
+    },
+    "4. GBM kuantil 95% seragam": {
+      "biaya_total": 367356.1846,
+      "biaya_2.5%": 321577.17,
+      "biaya_97.5%": 428722.5823,
+      "selisih_vs_terbaik": 0.0,
+      "selisih_2.5%": 0.0,
+      "selisih_97.5%": 0.0,
+      "fill_rate": 0.943,
+      "fill_2.5%": 0.9251,
+      "fill_97.5%": 0.9588
+    },
+    "5. GBM kuantil per ABC (fill rate)": {
+      "biaya_total": 380294.7515,
+      "biaya_2.5%": 329015.3087,
+      "biaya_97.5%": 447944.9185,
+      "selisih_vs_terbaik": 12938.5669,
+      "selisih_2.5%": 4573.7446,
+      "selisih_97.5%": 22475.4013,
+      "fill_rate": 0.9096,
+      "fill_2.5%": 0.8891,
+      "fill_97.5%": 0.9282
+    },
+    "6. GBM kuantil per ABC (biaya min)": {
+      "biaya_total": 377117.2482,
+      "biaya_2.5%": 326135.6787,
+      "biaya_97.5%": 444634.4885,
+      "selisih_vs_terbaik": 9761.0636,
+      "selisih_2.5%": 1403.9401,
+      "selisih_97.5%": 19496.7174,
+      "fill_rate": 0.9058,
+      "fill_2.5%": 0.8855,
+      "fill_97.5%": 0.9245
+    }
+  },
+  "sensitivitas_terbaik": {
+    "2. normal klasik 95%": 10,
+    "4. GBM kuantil 95% seragam": 9,
+    "3. rasio SES empiris 95%": 6,
+    "6. GBM kuantil per ABC (biaya min)": 2
+  },
+  "profil_pola": {
+    "bergejolak": {
+      "barang": 1320,
+      "omzet": 11800457.15
+    },
+    "sangat tidak teratur": {
+      "barang": 2437,
+      "omzet": 3886014.85
+    },
+    "stabil": {
+      "barang": 271,
+      "omzet": 3161890.83
+    },
+    "terlalu jarang": {
+      "barang": 154,
+      "omzet": 7515.900000000001
+    },
+    "terputus-putus": {
+      "barang": 518,
+      "omzet": 208979.91999999998
+    }
+  },
+  "minggu_tutup": [
+    "2009-12-28",
+    "2010-12-27"
+  ],
+  "kategori": {
+    "metode": "ma4",
+    "wape_item": {
+      "ma4": 0.5701120718914543,
+      "ma13": 0.6166736282826983,
+      "ses": 0.5544591273420263,
+      "croston": 0.7822159929770204,
+      "snaive": 1.025925032325208,
+      "gbm": 0.5865286207103366
+    },
+    "wape_kategori": {
+      "ma4": 0.16294537817740878,
+      "ma13": 0.26427146936791357,
+      "ses": 0.17562276901904955,
+      "croston": 0.3318439376049801,
+      "snaive": 0.25844775810739196,
+      "gbm": 0.22531201441717086
+    },
+    "persen_omzet_lainnya": 15.6,
+    "jumlah_kategori": 11
+  },
+  "minggu_depan": [
+    {
+      "minggu": "2011-12-05",
+      "buka": true
+    },
+    {
+      "minggu": "2011-12-12",
+      "buka": true
+    },
+    {
+      "minggu": "2011-12-19",
+      "buka": true
+    },
+    {
+      "minggu": "2011-12-26",
+      "buka": false
+    },
+    {
+      "minggu": "2012-01-02",
+      "buka": true
+    }
+  ]
+}

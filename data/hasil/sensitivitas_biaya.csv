@@ -1,0 +1,28 @@
+rasio_biaya_pokok,biaya_simpan,biaya_pesan,terbaik,biaya_terbaik
+0.4,0.1,15.0,3. rasio SES empiris 95%,258951.18018016242
+0.4,0.1,30.0,3. rasio SES empiris 95%,338301.1801801624
+0.4,0.1,60.0,3. rasio SES empiris 95%,497001.1801801624
+0.4,0.2,15.0,3. rasio SES empiris 95%,311121.4678543432
+0.4,0.2,30.0,3. rasio SES empiris 95%,390471.4678543432
+0.4,0.2,60.0,3. rasio SES empiris 95%,549171.4678543431
+0.4,0.3,15.0,4. GBM kuantil 95% seragam,348183.23838912346
+0.4,0.3,30.0,4. GBM kuantil 95% seragam,426228.23838912346
+0.4,0.3,60.0,4. GBM kuantil 95% seragam,582318.2383891235
+0.6,0.1,15.0,4. GBM kuantil 95% seragam,242550.14611034168
+0.6,0.1,30.0,4. GBM kuantil 95% seragam,320595.14611034165
+0.6,0.1,60.0,2. normal klasik 95%,473779.1710681932
+0.6,0.2,15.0,4. GBM kuantil 95% seragam,289311.1845575637
+0.6,0.2,30.0,4. GBM kuantil 95% seragam,367356.18455756374
+0.6,0.2,60.0,2. normal klasik 95%,507088.35825521126
+0.6,0.3,15.0,4. GBM kuantil 95% seragam,336072.2230047857
+0.6,0.3,30.0,6. GBM kuantil per ABC (biaya min),412811.7040985529
+0.6,0.3,60.0,2. normal klasik 95%,540397.5454422294
+0.8,0.1,15.0,4. GBM kuantil 95% seragam,199265.10509452247
+0.8,0.1,30.0,2. normal klasik 95%,264647.2415232783
+0.8,0.1,60.0,2. normal klasik 95%,384497.2415232783
+0.8,0.2,15.0,6. GBM kuantil per ABC (biaya min),248049.38396359366
+0.8,0.2,30.0,2. normal klasik 95%,309059.49110596906
+0.8,0.2,60.0,2. normal klasik 95%,428909.49110596906
+0.8,0.3,15.0,2. normal klasik 95%,293546.74068865983
+0.8,0.3,30.0,2. normal klasik 95%,353471.74068865983
+0.8,0.3,60.0,2. normal klasik 95%,473321.74068865983
